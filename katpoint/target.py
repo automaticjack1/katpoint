@@ -657,8 +657,8 @@ class Target(object):
         w = np.array(azel_to_enu(az, el))
         # enu vector pointing from reference antenna to offset point
         z = np.array(azel_to_enu(offset_az, offset_el))
-        # u axis is orthogonal to z and w, and row_stack makes it 2-D array of column vectors
-        u = np.row_stack(np.cross(z, w, axis=0)) * offset_sign
+        # u axis is orthogonal to z and w, and vstack makes it 2-D array of column vectors
+        u = np.vstack(np.cross(z, w, axis=0)) * offset_sign
         u_norm = np.sqrt(np.sum(u ** 2, axis=0))
         # Ensure that u and w (and therefore v) have the same shape to handle scalar vs array output correctly
         u = u.reshape(w.shape) / u_norm
